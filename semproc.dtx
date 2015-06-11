@@ -285,7 +285,7 @@ and the derived files           semproc.ins,
 % We load |hyperref| and |bookmark| for references. Option |hypertexnames| must
 % be set to |false|, otherwise referencing the talks is buggy. 
 %    \begin{macrocode}
-\RequirePackage
+\RequirePackage%
   [unicode=true,colorlinks=true,hypertexnames=false]
   {hyperref}
 \hypersetup{allcolors={RoyalBlue}}
@@ -420,7 +420,7 @@ and the derived files           semproc.ins,
     \ifdefvoid{\semproc@talk@notes}{}{%
       \hfill{\notesname~\semproc@talk@notes}%
     }
-    \par\nobreak
+    \par\nobreak%
   }%
   \vskip 3.5ex
 }
@@ -453,7 +453,7 @@ and the derived files           semproc.ins,
   \thispagestyle{\chapterpagestyle}%
   \semproc@talk@head{#2}
   \renewcommand\@currentlabelname{#2}
-  \newrefsection
+  \newrefsection%
   \etoctoccontentsline*{talk}%
     {\protect\numberline{\thetalk}#2}{0}
   \etoctoccontentsline{speaker}%
@@ -494,7 +494,7 @@ and the derived files           semproc.ins,
 % |\globaltoc| prints out a global table of contents showing only the talks and
 % the respective speakers/typists.
 %    \begin{macrocode}
-\newcommand{\globaltoc}{
+\newcommand{\globaltoc}{%
   \begingroup
     \etocsetnexttocdepth{1}
     \etocsetlevel{speaker}{1}
@@ -548,7 +548,7 @@ and the derived files           semproc.ins,
 % |\localtoc| prints out a local table of contents consisting only of the
 % sections and subsections in the current talk.
 %    \begin{macrocode}
-\newcommand{\localtoc}{
+\newcommand{\localtoc}{%
   \begingroup
     \let\parskip@old%
     \parskip\parskip0ex%
