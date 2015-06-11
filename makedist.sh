@@ -1,6 +1,9 @@
 #!/bin/bash
+mkdir -p doc/
 mkdir -p texmf/tex/latex/semproc
 mkdir -p texmf/doc/latex/semproc
+
+pdflatex semproc.dtx
 
 cp semproc.pdf texmf/doc/latex/semproc
 cp doc/example.tex texmf/doc/latex/semproc
