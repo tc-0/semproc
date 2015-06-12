@@ -16,5 +16,7 @@
 *.ilg
 *.ins
 *.zip
+*.gls
+*.ind
 README.txt
 texmf/
