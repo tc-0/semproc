@@ -26,3 +26,14 @@ scrreprt. It provides the following macros and environments:
 
 Run `./makedist.sh` in the directory containing the file `semproc.dtx` and unzip
 the archive `semproc.zip` in your local `$TEXMF`-tree.
+
+## Licence
+
+Copyright (C) 2015 by Tobias Columbus
+
+This work may be distributed and/or modified under the
+conditions of the LaTeX Project Public License (LPPL), either
+version 1.3c of this license or (at your option) any later
+version.  The latest version of this license is in the file:
+
+http://www.latex-project.org/lppl.txt
