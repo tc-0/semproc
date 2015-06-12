@@ -8,13 +8,25 @@
 %<*exampletex>
 \documentclass[a4paper,openright,parskip=half-]{semproc}
 \addglobalbib{example.bib}
+\usepackage[ngerman,english]{babel}
 \begin{document}
 \author{Max Mustermann}
 \title{Example}
 \maketitle
 \globaltoc
-\chapter*{Introduction}
-This is a showcase for the \verb|semproc| class.
+\chapter{Introduction}
+This document serves as an example for the \verb|semproc| class. 
+
+The reader should note that this introduction, which is typeset as a
+\verb|\chapter| shows up in the table of contents. However, the numbering scheme
+of talks and chapters is confusing at best. \verb|semproc| therefore offers a
+macro \verb|\nonumchapter| for unnumbered chapters that show up in the table of
+contents and may be used e.\,g.\ for introductions as in the following second
+introduction.
+
+\nonumchapter{Second Introduction}
+This is a second introduction with no number but still showing up in the table
+of contents.
 
 \talk[speaker={Donald Knuth}]{Notation}
 \begin{summary}
@@ -43,6 +55,14 @@ A final section with final words.
 \localtoc
 \section{Section A}
 \section{Section B}
+
+\selectlanguage{ngerman}
+\talk[speaker={Hans}]{\"Uber etwas Wichtiges}
+\begin{summary}
+  Hier sieht man, dass \verb|semproc| an andere Sprachen, wie zum Beispiel
+  \verb|ngerman| angepasst werden kann. Momentan werden aber nur \verb|english|
+  und \verb|ngerman| unterstützt.
+\end{summary}
 \end{document}
 %</exampletex>
 %<*examplebib>
@@ -80,10 +100,9 @@ See http://www.latex-project.org/lppl.txt
 ----------------------------------------------------------------
 
 This class provides some means for typesetting seminar proceedings. An example
-of how to use this class can be found in the file doc/example.tex
+of how to use this class can be found in the file example.tex
 
-For installation run latex on the file semproc.dtx and copy the file 
-semproc.cls into <TEXMF>/tex/latex/semproc/
+For instructions how to install this file see README.md
 %</readme>
 %
 %<*internal>
@@ -123,8 +142,11 @@ Tobias Columbus.
 
 This work consists of the files semproc.dtx
 and the derived files           semproc.ins,
-                                semproc.pdf and
-                                semproc.sty.
+                                semproc.pdf,
+                                semproc.cls,
+                                example.tex,
+                                example.bib,
+                                example.pdf
 
 \endpostamble
 \usedir{tex/latex/semproc}
@@ -140,10 +162,10 @@ and the derived files           semproc.ins,
   \file{\jobname.ins}{\from{\jobname.dtx}{install}}
 }
 \generate{
-  \file{doc/example.tex}{\from{\jobname.dtx}{exampletex}}
+  \file{example.tex}{\from{\jobname.dtx}{exampletex}}
 }
 \generate{
-  \file{doc/example.bib}{\from{\jobname.dtx}{examplebib}}
+  \file{example.bib}{\from{\jobname.dtx}{examplebib}}
 }
 \nopreamble\nopostamble
 \usedir{doc/latex/semproc}
@@ -173,6 +195,7 @@ and the derived files           semproc.ins,
 \usepackage[numbered]{hypdoc}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{tabularx}
 \parindent=0em
 \parskip=0.5ex
 \lstset{
@@ -228,23 +251,64 @@ and the derived files           semproc.ins,
 % \DescribeMacro{\localbib} |\localbib| typesets a bibliography for the current
 % talk.
 %
+% \DescribeMacro{\nonumchapter} |\nonumchapter| \marg{title} starts a new
+% unnumbered |\chapter*| with \meta{title} but makes sure the chapter occurs in
+% the global table of contents. More precisely, |\nonumchapter| is just a
+% wrapper around |\chapter*| and |\etoctoccontentsline*|.
+%
 % \subsection{Environments}
 %
 % \DescribeEnv{summary} The |summary| environment is a drop-in
 % replacement for the |abstract| environment.
 %
+% \subsection{Customization}
+% |semproc| allows for customization of the fonts used in the heading of a talk
+% and in the local and global table of contents. The fonts may be customized
+% with |\setkomafont| or |\addtokomafont| as described in the documentation of
+% KOMA-Script. All fonts are shown in table~\ref{table:fonts}.
+% \begin{table}
+%   \begin{tabularx}{\textwidth}{lXX}
+%     Font & Usage & Default  \\\hline
+%     talkhead & Font of the head of a talk heading, i.\,e.\ the line
+%     ``Talk~3''. & |\usekomafont{disposition}| |\usekomafont{section}| \\
+%     talktitle & Font of the title of a talk &
+%     |\usekomafont{disposition}| |\usekomafont{chapter}| \\
+%     talkspeakers & Font of the speaker and typist of a talk &
+%     |\usekomafont{disposition}| \\\\
+%     globaltocspeaker & Speaker in an entry in the global table of contents &
+%     |\sffamily| \\
+%     globaltocnumber& Number of an entry in the global table of contents &
+%     |\usekomafont{disposition}| \\
+%     globaltoctitle& Title of an entry in the global table of contents &
+%     |\usekomafont{disposition}| \\
+%     globaltocpage& Page number of an entry in the global table of contents &
+%     |\usekomafont{disposition}| \\\\
+%     localtocheading & Heading of the local table of contents
+%     typeset with |\localtoc| & |\usekomafont{disposition}|  \\
+%     localtocnumber & Number of an entry in the local table of contents &
+%     |\sffamily| \\
+%     localtoctitle& Title of an entry in the local table of contents &
+%     |\sffamily| \\
+%     localtocpage & Page number of an entry in the local table of contents &
+%     |\sffamily| \\\\
+%     summaryheading & Font for the heading of a |summary| environment &
+%     |\usekomafont{disposition}|
+%   \end{tabularx}
+%   \caption{Fonts that can be customized.}\label{table:fonts}
+% \end{table}
+% 
 % \subsection{Packages}
-% |semproc| loads the following packages: |xkeyval|, |etoc|, |hyperref|,
-% |bookmark|, |etoolbox|, |biblatex|.
-% Moreover, it passes the option |dvipsnames| to the package |xcolor|, which is
-% loaded automatically by hyperref. For the precise arguments to these packages,
-% the reader is referred to the implementation.
+% |semproc| loads the following packages: |xkeyval|, |xcolor| |etoc|,
+% |hyperref|, |bookmark|, |etoolbox|, |biblatex| and |csquotes|. Moreover, it
+% passes the option |dvipsnames| to the package |xcolor|, which is loaded
+% automatically by hyperref. For the precise arguments to these packages, the
+% reader is referred to the implementation.
 %
 % Note however, that bibliographies should be typeset using |biblatex| as
 % opposed to |bibtex|.
 %
 % \subsection{Example}
-% An example can be found in the file |doc/example.tex|.
+% An example can be found in the file |example.tex|.
 %
 %\StopEventually{
 %  \PrintChanges
@@ -271,8 +335,8 @@ and the derived files           semproc.ins,
 %    \begin{macrocode}
 \RequirePackage{xkeyval}
 %    \end{macrocode}
-% We pass |dvipsnames| to |xcolor|, which is loaded by |etoc| as we set
-% |RoyalBlue| as default colour.
+% We load |xcolor| and pass option |dvipsnames| as we set |RoyalBlue| as default
+% colour for all links.
 %    \begin{macrocode}
 \PassOptionsToPackage{dvipsnames}{xcolor}
 \RequirePackage{xcolor}
@@ -282,21 +346,25 @@ and the derived files           semproc.ins,
 %    \begin{macrocode}
 \RequirePackage{etoc}
 %    \end{macrocode}
-% We load |hyperref| and |bookmark| for references. Option |hypertexnames| must
-% be set to |false|, otherwise referencing the talks is buggy. 
+% We load |hyperref| for references. Option |hypertexnames| must be set to
+% |false|, otherwise referencing the talks is buggy -- at least the last time I
+% tried.
 %    \begin{macrocode}
 \RequirePackage%
   [unicode=true,colorlinks=true,hypertexnames=false]
   {hyperref}
+\RequirePackage{bookmark}
 \hypersetup{allcolors={RoyalBlue}}
 %    \end{macrocode}
 % We load |etoolbox| for |\ifdefvoid| used in |\semproc@talk@head|.
 %    \begin{macrocode}
 \RequirePackage{etoolbox}
 %    \end{macrocode}
-% We load |biblatex| for managing bibliographies per talk via refsections.
+% We load |biblatex| for managing bibliographies per talk via refsections and
+% |csquotes| as it is recommended by |biblatex|.
 %    \begin{macrocode}
 \RequirePackage{biblatex}
+\RequirePackage{csquotes}
 %    \end{macrocode}
 %\end{macro}
 %
@@ -377,6 +445,17 @@ and the derived files           semproc.ins,
 %    \begin{macrocode}
 \newkomafont{summaryheading}
   {\usekomafont{disposition}}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\nonumchapter}
+% |\nonumchapter|\marg{title} is a thin wrapper around |\chapter*| and
+% |\etoctoccontentsline*|.
+%    \begin{macrocode}
+\newcommand{\nonumchapter}[1]{%
+  \chapter*{#1}%
+  \etoctoccontentsline*{chapter}{#1}{0}%
+}
 %    \end{macrocode}
 %\end{macro}
 %
@@ -656,5 +735,3 @@ and the derived files           semproc.ins,
 %</class>
 %    \end{macrocode}
 %\Finale
-
-

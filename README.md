@@ -21,5 +21,5 @@
 
 ## Installation
 
-Run `makedist.sh` in the directory and unzip the archive `semproc.zip` in your
-local `$TEXMF`-tree. 
+Run `./makedist.sh` in the directory containing the file `semproc.dtx` and unzip
+the archive `semproc.zip` in your local `$TEXMF`-tree.
