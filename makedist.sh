@@ -3,6 +3,8 @@ mkdir -p texmf/tex/latex/semproc
 mkdir -p texmf/doc/latex/semproc
 mkdir -p texmf/source/latex/semproc
 
+mkdir -p semproc
+
 pdflatex semproc.dtx
 makeindex -s gglo.ist -o semproc.gls semproc.glo
 makeindex -s gind.ist -o semproc.ind semproc.idx
@@ -27,4 +29,10 @@ cp README.txt  texmf/doc/latex/semproc
   pwd
   zip ../semproc.tds.zip tex/latex/semproc/* doc/latex/semproc/* source/latex/semproc/*
 )
-zip semproc.zip semproc.dtx semproc.pdf README.txt semproc.tds.zip
+
+cp semproc.tds.zip semproc
+cp semproc.dtx semproc
+cp semproc.pdf semproc
+cp README.txt semproc/README
+
+zip semproc.zip semproc/*
