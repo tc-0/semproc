@@ -99,10 +99,13 @@ Released under the LaTeX Project Public License v1.3c or later
 See http://www.latex-project.org/lppl.txt
 ----------------------------------------------------------------
 
-This class provides some means for typesetting seminar proceedings. An example
-of how to use this class can be found in the file example.tex
-
-For instructions how to install this file see README.md
+This class provides some means for typesetting seminar proceedings based on
+KOMA-Script's scrreprt class and etoc: It offers an alternative to \chapter that
+typesets the speaker and if necessary the typist of the notes for the talk in
+question. Moreover, the class provides two types of table of contents. A global
+table of contents showing only the talks of the seminar and the respective
+speakers and a local table of contents for each talk showing the sections and
+subsections of the respective talk.
 %</readme>
 %
 %<*internal>
@@ -185,7 +188,7 @@ and the derived files           semproc.ins,
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesClass{semproc}
 %<*class>
-  [2015/06/12 v0.1 LaTeX class for seminar proceedings]
+  [2015/06/15 v0.1 LaTeX class for seminar proceedings]
 %</class>
 %
 %<*driver>
@@ -225,7 +228,7 @@ and the derived files           semproc.ins,
 %
 %\maketitle
 %
-%\changes{v0.1}{2015/06/12}{First public release}
+%\changes{v0.1}{2015/06/15}{First public release}
 %
 % \section{Documentation}
 % The class |semproc| is derived from KOMA-Script's class |scrreprt|. In
