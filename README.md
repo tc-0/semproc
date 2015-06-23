@@ -25,7 +25,7 @@ scrreprt. It provides the following macros and environments:
 ## Installation
 
 Run `./makedist.sh` in the directory containing the file `semproc.dtx` and unzip
-the archive `semproc.zip` in your local `$TEXMF`-tree.
+the archive `semproc.tds.zip` in your local `$TEXMF`-tree.
 
 ## Licence
 

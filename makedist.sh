@@ -30,7 +30,8 @@ cp README.txt  texmf/doc/latex/semproc
   zip ../semproc.tds.zip tex/latex/semproc/* doc/latex/semproc/* source/latex/semproc/*
 )
 
-cp semproc.tds.zip semproc
+# TDS archive unnecessary for small packages.
+# cp semproc.tds.zip semproc
 cp semproc.dtx semproc
 cp semproc.pdf semproc
 cp README.txt semproc/README
